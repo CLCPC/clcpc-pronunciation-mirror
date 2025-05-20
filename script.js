@@ -18,19 +18,33 @@ function startListening() {
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
-  document.getElementById("feedback").textContent = "Listening...";
+  const feedback = document.getElementById("feedback");
+  feedback.textContent = "🎤 Listening...";
 
   recognition.onresult = (event) => {
     const spoken = event.results[0][0].transcript.toLowerCase().trim();
+    console.log("RESULT:", spoken);
     if (spoken.includes(word)) {
-      document.getElementById("feedback").textContent = `✅ You said: ${spoken}`;
+      feedback.textContent = `✅ You said: ${spoken}`;
     } else {
-      document.getElementById("feedback").textContent = `❌ You said: ${spoken} — Try again.`;
+      feedback.textContent = `❌ You said: ${spoken} — Try again.`;
     }
   };
 
   recognition.onerror = (event) => {
-    document.getElementById("feedback").textContent = `⚠️ Error: ${event.error}`;
+    console.error("ERROR:", event.error);
+    feedback.textContent = `⚠️ Error: ${event.error}`;
+  };
+
+  recognition.onend = () => {
+    console.log("Recognition ended");
+    if (feedback.textContent === "🎤 Listening...") {
+      feedback.textContent = "⚠️ No speech detected. Try again.";
+    }
+  };
+
+  recognition.onspeechend = () => {
+    recognition.stop();
   };
 
   recognition.start();
