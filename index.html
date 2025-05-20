@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CLCPC Pronunciation Practice Mirror</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>CLCPC Pronunciation Practice</h1>
+    <p>Listen and repeat the Comanche word.</p>
+
+    <div id="practice-area">
+      <select id="word-select">
+        <option value="aama">aama (arm)</option>
+        <option value="kwahi">kwahi (back)</option>
+        <option value="motso">motso (beard)</option>
+      </select>
+      <br><br>
+      <button onclick="playAudio()">🔊 Hear Word</button>
+      <button onclick="startListening()">🎤 Repeat Word</button>
+      <p id="feedback"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
